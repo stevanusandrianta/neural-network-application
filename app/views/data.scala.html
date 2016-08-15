@@ -1,0 +1,30 @@
+@(message: String = "")
+
+<script>
+        var msg = "@message";
+        if(msg != ""){
+            bootbox.alert(msg);
+        }
+</script>
+
+@helper.form(action = routes.HomeController.updateData(), 'enctype -> "multipart/form-data") {
+
+
+    <div class="row panel panel-default">
+        <div class="col-md-6 panel-body">
+            <h3>Update Data</h3>
+            <label>Silahkan upload data csv anda untuk memulai klasifikasi</label>
+            <label>Data yang digunakan adalah data yang sudah memiliki flag</label>
+            <input type="file" name="picture" class="form-control">
+            <br />
+            <input type="submit" class="form-control">
+        </div>
+    </div>
+
+
+    <h3>Data dibawah adalah data yang digunakan untuk menghitung akurasi dari model</h3>
+    <label>Untuk melihat data yang ada, silahkan mengklik link dibawah ini</label>
+    <br />
+    <a href="/downloadData">download</a>
+
+}

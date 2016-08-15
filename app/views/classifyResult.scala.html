@@ -1,0 +1,45 @@
+@(data: List[(List[Double], Int)])
+
+<script>
+        $(document).ready(function() {
+            $('#tableClassify').DataTable();
+        });
+</script>
+
+<h3>Silahkan download data hasil klasifikasi anda</h3>
+
+<a href="downloadcsv">download</a>
+
+<h3>Data hasil klasifikasi</h3>
+<table class="table" id="tableClassify">
+    <thead>
+    <tr>
+        <th>No Transaksi</th>
+        <th>Status Fraud</th>
+        <th>x1</th>
+        <th>x2</th>
+        <th>x3</th>
+    </tr>
+    </thead>
+    <tfoot>
+    @for(d <- data) {
+        @if(d._1.head == 1) {
+            <tr style="color: red">
+                <td style="color: red">@d._2</td>
+                <td>Fraud</td>
+                <td>@d._1(1)</td>
+                <td>@d._1(2)</td>
+                <td>@d._1(3)</td>
+            </tr>
+        }else{
+            <tr>
+                <td>@d._2</td>
+                <td>Not Fraud</td>
+                <td>@d._1(1)</td>
+                <td>@d._1(2)</td>
+                <td>@d._1(3)</td>
+            </tr>
+        }
+    }
+    </tfoot>
+</table>

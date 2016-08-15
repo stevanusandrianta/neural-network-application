@@ -1,0 +1,60 @@
+@(data: List[Model], message: String = "")
+
+<script>
+
+    var msg = "@message";
+    if(msg != ""){
+        bootbox.alert(msg);
+        //alert(msg);
+    }
+
+    function deleteModel(modelid){
+        bootbox.confirm("Kamu yakin ingin menghapus model dengan id : " + modelid + "?", function(result) {
+            if(result){
+                var link = "/deleteModel/" + modelid;
+                window.location = link;
+            }
+        });
+    }
+
+</script>
+
+@helper.form(action = routes.HomeController.doLearnModel(), 'enctype -> "multipart/form-data") {
+
+    <div class="row panel panel-default">
+
+        <div class="col-md-6 panel-body">
+            <h3>Add Learning Model</h3>
+            <label>Silahkan upload data csv anda untuk memulai klasifikasi</label>
+            <label>Data yang digunakan adalah data yang sudah memiliki flag</label>
+            <input type="file" name="picture" class="form-control">
+            <br>
+            <input type="submit" class="form-control">
+        </div>
+    </div>
+
+}
+
+<h3>User List</h3>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Timestamp</th>
+        <th>Accuracy</th>
+        <th>is Active</th>
+        <th>Action</th>
+    </tr>
+    @for(d <- data) {
+        <tr>
+            <td>@d.id</td>
+            <td>@d.timestamp</td>
+            <td>@d.accuracy</td>
+            <td>@d.isActive</td>
+            <td>
+                @if(d.isActive != "true"){<a href="/activateModel/@d.id">Activate</a>}
+                <a onclick="deleteModel('@d.id')">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

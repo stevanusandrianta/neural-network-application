@@ -1,0 +1,71 @@
+@()(content: Html, user: User, page: String = "")
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fraud Detection System</title>
+
+        <!-- bootstrap asset -->
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap-theme.min.css")">
+
+
+        <script src="@routes.Assets.versioned("javascripts/jquery.min.js")"></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+
+        <script src="@routes.Assets.versioned("javascripts/bootbox.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/datatable-jquery.min.js")"></script>
+        <script src="@routes.Assets.versioned("javascripts/datatable-bootstrap.min.js")"></script>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/style.css")">
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Fraud Detection System</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        @if(user != null) {
+                            <li class="@(if(page=="") "active" else "")"><a href="/home">Home</a></li>
+                            <li class="@(if(page=="classify") "active" else "")"><a href="/classify">Classify</a></li>
+                            @if(user.role == "admin"){
+                                <li class="@(if(page=="data") "active" else "")"><a href="/data">Data</a></li>
+                                <li class="@(if(page=="model") "active" else "")"><a href="/model">Model</a></li>
+                                <li class="@(if(page=="user") "active" else "")"><a href="/userList">User</a></li>
+                            }
+
+                            <li><a href="/logout">Logout</a></li>
+                        }
+                    </ul>
+                </div><!-- /.nav-collapse -->
+            </div><!-- /.container -->
+        </nav><!-- /.navbar -->
+
+        <div class="container">
+
+        @content
+
+
+        </div><!--/.container-->
+
+    </body>
+</html>
+
+    <!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

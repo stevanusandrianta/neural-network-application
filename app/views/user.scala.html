@@ -1,0 +1,54 @@
+@import helper._
+@(data: List[User], message: String)
+
+@form(action=routes.HomeController.addUser()) {
+
+    <div class="row panel panel-default">
+        <div class="col-md-6 panel-body">
+            <h3>Add User</h3>
+            <label>Username</label>
+            <input type="text" name="username" class="form-control"/>
+            <label>password</label>
+            <input type="text" name="password" class="form-control"/><br />
+                <input type="submit" value="Submit" class="form-control">
+        </div>
+    </div>
+
+}
+
+<h3>User List</h3>
+
+<script>
+
+    var msg = "@message";
+    if(msg != ""){
+        bootbox.alert(msg);
+    }
+
+    function deleteUser(username, userid){
+        bootbox.confirm("Kamu yakin ingin menghapus user dengan username : " + username + "?", function(result) {
+            if(result){
+                var link = "/deleteUser/" + userid;
+                window.location = link;
+            }
+        });
+    }
+
+</script>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Action</th>
+    </tr>
+    @for(d <- data) {
+        <tr>
+            <td>@d.id</td>
+            <td>@d.username</td>
+            <td>@d.role</td>
+            <td><a onclick="deleteUser('@d.username', '@d.id')">Delete</a></td>
+        </tr>
+    }
+</table>

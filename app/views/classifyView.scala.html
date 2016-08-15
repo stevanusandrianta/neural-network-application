@@ -1,0 +1,27 @@
+@(message: String)
+
+<script>
+    var msg = "@message";
+    if (msg != "") {
+        bootbox.alert(msg);
+    }
+</script>
+
+@helper.form(action = routes.HomeController.doClassify(), 'enctype -> "multipart/form-data") {
+
+    <div class="row panel panel-default">
+        <div class="col-md-6 panel-body">
+            <h3>Klasifikasi</h3>
+            <label>Silahkan upload data csv anda untuk memulai klasifikasi</label>
+            <label>Data yang digunakan adalah data yang belum memiliki flag</label>
+            <input type="file" name="picture" class="form-control">
+            <br />
+            <input type="submit" class="form-control">
+        </div>
+    </div>
+
+    <table>
+
+    </table>
+
+}
